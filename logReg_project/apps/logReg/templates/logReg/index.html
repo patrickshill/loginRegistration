@@ -17,28 +17,34 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1>Registration</h1>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == "registration error" %}
+                            <p class="error">
+                                {{ message }}
+                            </p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 <form action="/register" method="post">
                     {% csrf_token %}
                     <table class="table">
                         <tr>
                             <td>First name</td>
                             <td>
-                                <p class="error">
-                                    {{ messages.error }}
-                                </p>
-                                <input type="text" name="first_name" id="">
+                                <input type="text" name="first_name" id="" value="{{ request.session.first_name }}">
                             </td>
                         </tr>
                         <tr>
                             <td>Last Name:</td>
                             <td>
-                                <input type="text" name="last_name" id="">
+                                <input type="text" name="last_name" id="" value="{{ request.session.last_name }}">
                             </td>
                         </tr>
                         <tr>
                             <td>Email:</td>
                             <td>
-                                <input type="text" name="Email" id="">
+                                <input type="text" name="email" id="" value="{{ request.session.email }}">
                             </td>
                         </tr>
                         <tr>
@@ -62,13 +68,22 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1>Login</h1>
+                {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags == "login error" %}
+                        <p class="error">
+                            {{ message }}
+                        </p>
+                    {% endif %}
+                    {% endfor %}
+                {% endif %}
                 <form action="/login" method="post">
                     {% csrf_token %}
                     <table class="table">
                         <tr>
                             <td>Email:</td>
                             <td>
-                                <input type="text" name="Email" id="">
+                                <input type="text" name="email" id="">
                             </td>
                         </tr>
                         <tr>
